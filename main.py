@@ -44,3 +44,33 @@ print(site_heading1)
 print("\n> Grab <p> element(s)")
 site_paragraphs=soup.select('p')
 print(site_paragraphs)
+
+print("\n+++++++++++++++++++++++++++++++++++++++++++++")
+print("Video 119. Web Scrapping - Grabbing a Class")
+print("+++++++++++++++++++++++++++++++++++++++++++++")
+
+print("\n==> Grab the website from Wikipedia - Grace Hopper <==")
+res = requests.get('https://en.wikipedia.org/wiki/Grace_Hopper')
+soup = bs4.BeautifulSoup(res.text, 'lxml')
+# uncomment the print command below if you want to see the html of the webpage
+# print(soup)
+
+print("\n==> Grab a class and its content from the website <==")
+print("> Grab a 'toctext' class from the website as an example")
+# we know that the website has a class named 'toctext' from inspecting the element of the website
+site_toctext_class=soup.select('.toctext')
+print(f"The contents of 'toctext' class are:\n{site_toctext_class}")
+
+print("\n> Get the first item of the toctext class content")
+first_item=site_toctext_class[0]
+print(f"The first content of 'toctext' class is:\n{first_item}")
+
+print("\n> Get the text of the first toctext class content")
+first_text=first_item.text
+print(f"Text only of the first content of 'toctext' class is: {first_text}")
+
+print("\n> Get all of text of the toctext class content")
+text_content=[]
+for text_item in site_toctext_class:
+  text_content.append(text_item.text)
+print(f"Text only of the all content in 'toctext' class are:\n{text_content}")
