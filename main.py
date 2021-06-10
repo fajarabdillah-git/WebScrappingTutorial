@@ -74,3 +74,28 @@ text_content=[]
 for text_item in site_toctext_class:
   text_content.append(text_item.text)
 print(f"Text only of the all content in 'toctext' class are:\n{text_content}")
+
+print("\n+++++++++++++++++++++++++++++++++++++++++++++")
+print("Video 120. Web Scrapping - Grabbing an Image")
+print("+++++++++++++++++++++++++++++++++++++++++++++")
+
+print("\n==> Grab the website from Wikipedia - Deep Blue (Chess Computer) <==")
+res = requests.get("https://en.wikipedia.org/wiki/Deep_Blue_(chess_computer)")
+soup = bs4.BeautifulSoup(res.text, 'lxml')
+# uncomment the print command below if you want to see the html of the webpage
+# print(soup)
+
+print("\n==> Grab the Blue Computer Image on the website <==")
+
+print("\n> Try to grabbing <img> element as it's where the image belong")
+image=soup.select('img')
+print(image)
+print("!! It returns too many list of image element, we need to specify !!")
+
+print("\n> Try to grabbing <.image> class as it's where the image belong")
+image=soup.select('.image')[0]
+print(image)
+
+print("\n> Grab the image link add the 'https:' attribute to make the url be able to open on browser")
+image_link="https:" + image.select('img')[0]['src']
+print(image_link)
